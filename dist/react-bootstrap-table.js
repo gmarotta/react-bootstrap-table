@@ -3678,6 +3678,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 	    };
+
+	    this.changePageHandler = function (e) {
+	      e.preventDefault();
+
+	      var _props2 = _this.props;
+	      var dataSize = _props2.dataSize;
+	      var sizePerPage = _props2.sizePerPage;
+
+	      var totalPages = Math.ceil(dataSize / sizePerPage);
+
+	      var val = e;
+	      if (val <= totalPages) {
+	        _this.changePage(val);
+	      }
+	    };
+
+	    this.nextPage = function (e) {
+	      e.preventDefault();
+	      _this.changePage('>');
+	    };
+
+	    this.lastPage = function (e) {
+	      e.preventDefault();
+	      _this.changePage('>>');
+	    };
+
+	    this.previousPage = function (e) {
+	      e.preventDefault();
+	      _this.changePage('<');
+	    };
+
+	    this.firstPage = function (e) {
+	      e.preventDefault();
+	      _this.changePage('<<');
+	    };
 	  }
 
 	  _createClass(PaginationList, [{
@@ -3685,18 +3720,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function render() {
 	      var _this2 = this;
 
-	      var _props2 = this.props;
-	      var dataSize = _props2.dataSize;
-	      var sizePerPage = _props2.sizePerPage;
-	      var sizePerPageList = _props2.sizePerPageList;
+	      var _props3 = this.props;
+	      var dataSize = _props3.dataSize;
+	      var sizePerPage = _props3.sizePerPage;
+	      var sizePerPageList = _props3.sizePerPageList;
 
 	      this.totalPages = Math.ceil(dataSize / sizePerPage);
-	      var pageBtns = this.makePage();
-	      var pageListStyle = {
-	        float: 'right',
-	        // override the margin-top defined in .pagination class in bootstrap.
-	        marginTop: '0px'
-	      };
 
 	      var sizePerPageOptions = sizePerPageList.map(function (_sizePerPage) {
 	        return _react2['default'].createElement(
@@ -3713,53 +3742,129 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 
 	      return _react2['default'].createElement(
-	        'div',
-	        { className: 'row', style: { marginTop: 15 } },
-	        sizePerPageList.length > 1 ? _react2['default'].createElement(
+	        'nav',
+	        { className: 'navbar adp-table-nav' },
+	        _react2['default'].createElement(
 	          'div',
-	          null,
+	          { className: 'container-fluid' },
 	          _react2['default'].createElement(
 	            'div',
-	            { className: 'col-md-6' },
+	            { className: 'navbar-collapse collapse adp-table-pagination' },
 	            _react2['default'].createElement(
-	              'div',
-	              { className: 'dropdown' },
+	              'ul',
+	              { className: 'nav navbar-nav navbar-right' },
 	              _react2['default'].createElement(
-	                'button',
-	                { className: 'btn btn-default dropdown-toggle',
-	                  type: 'button', id: 'pageDropDown', 'data-toggle': 'dropdown',
-	                  'aria-expanded': 'true' },
-	                sizePerPage,
+	                'li',
+	                { className: 'active' },
 	                _react2['default'].createElement(
-	                  'span',
-	                  null,
-	                  ' ',
-	                  _react2['default'].createElement('span', { className: 'caret' })
+	                  'div',
+	                  { className: 'prev-pages' },
+	                  _react2['default'].createElement(
+	                    'ul',
+	                    null,
+	                    _react2['default'].createElement(
+	                      'li',
+	                      null,
+	                      _react2['default'].createElement(
+	                        'button',
+	                        { onClick: this.firstPage, className: 'btn btn-default btn-first-page' },
+	                        _react2['default'].createElement('i', { className: 'icon-pagination-first' })
+	                      )
+	                    ),
+	                    _react2['default'].createElement(
+	                      'li',
+	                      null,
+	                      _react2['default'].createElement(
+	                        'button',
+	                        { onClick: this.previousPage, className: 'btn btn-default btn-prev-page' },
+	                        _react2['default'].createElement('i', { className: 'icon-pagination-previous' })
+	                      )
+	                    )
+	                  )
 	                )
 	              ),
 	              _react2['default'].createElement(
-	                'ul',
-	                { className: 'dropdown-menu', role: 'menu', 'aria-labelledby': 'pageDropDown' },
-	                sizePerPageOptions
+	                'li',
+	                null,
+	                _react2['default'].createElement(
+	                  'div',
+	                  { className: 'adp-pagination-input' },
+	                  _react2['default'].createElement('input', { type: 'number', role: 'textbox', min: '1', max: this.totalPages, className: 'current-start-page', value: this.props.currPage, onChange: this.changePageHandler })
+	                )
+	              ),
+	              _react2['default'].createElement(
+	                'li',
+	                null,
+	                _react2['default'].createElement(
+	                  'p',
+	                  { className: 'adp-page-indicator' },
+	                  ' of ',
+	                  _react2['default'].createElement(
+	                    'span',
+	                    { className: 'total-pages' },
+	                    this.totalPages
+	                  )
+	                )
+	              ),
+	              _react2['default'].createElement(
+	                'li',
+	                null,
+	                _react2['default'].createElement(
+	                  'div',
+	                  { className: 'next-pages' },
+	                  _react2['default'].createElement(
+	                    'ul',
+	                    null,
+	                    _react2['default'].createElement(
+	                      'li',
+	                      null,
+	                      _react2['default'].createElement(
+	                        'button',
+	                        { onClick: this.nextPage, className: 'btn btn-default btn-next-page' },
+	                        _react2['default'].createElement('i', { className: 'icon-pagination-next' })
+	                      )
+	                    ),
+	                    _react2['default'].createElement(
+	                      'li',
+	                      null,
+	                      _react2['default'].createElement(
+	                        'button',
+	                        { onClick: this.lastPage, className: 'btn btn-default btn-last-page' },
+	                        _react2['default'].createElement('i', { className: 'icon-pagination-last' })
+	                      )
+	                    )
+	                  )
+	                )
+	              )
+	            ),
+	            _react2['default'].createElement(
+	              'div',
+	              { className: 'rows-per-page-select pull-right' },
+	              _react2['default'].createElement(
+	                'label',
+	                { className: 'pull-left' },
+	                'Rows per page'
+	              ),
+	              _react2['default'].createElement(
+	                'div',
+	                { className: 'dropdown adp-dropdown btn-group pull-left', 'data-selectable': 'true' },
+	                _react2['default'].createElement(
+	                  'button',
+	                  { type: 'button', className: 'ui-select-container btn', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+	                  _react2['default'].createElement(
+	                    'span',
+	                    { className: 'selected-item' },
+	                    sizePerPage
+	                  ),
+	                  _react2['default'].createElement('span', { className: 'caret' })
+	                ),
+	                _react2['default'].createElement(
+	                  'ul',
+	                  { className: 'dropdown-menu', role: 'menu' },
+	                  sizePerPageOptions
+	                )
 	              )
 	            )
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { className: 'col-md-6' },
-	            _react2['default'].createElement(
-	              'ul',
-	              { className: 'pagination', style: pageListStyle },
-	              pageBtns
-	            )
-	          )
-	        ) : _react2['default'].createElement(
-	          'div',
-	          { className: 'col-md-12' },
-	          _react2['default'].createElement(
-	            'ul',
-	            { className: 'pagination', style: pageListStyle },
-	            pageBtns
 	          )
 	        )
 	      );

@@ -39,15 +39,41 @@ class PaginationList extends Component {
     }
   }
 
+  changePageHandler = e => {
+    e.preventDefault();
+
+    const { dataSize, sizePerPage } = this.props;
+    const totalPages = Math.ceil(dataSize / sizePerPage);
+
+    const val = e;
+    if (val <= totalPages ) {
+      this.changePage(val);
+    }
+  };
+
+  nextPage = e => {
+    e.preventDefault();
+    this.changePage('>');
+  };
+
+  lastPage = e => {
+    e.preventDefault();
+    this.changePage('>>');
+  };
+
+  previousPage = e => {
+    e.preventDefault();
+    this.changePage('<');
+  };
+
+  firstPage = e => {
+    e.preventDefault();
+    this.changePage('<<');
+  };
+
   render() {
     const { dataSize, sizePerPage, sizePerPageList } = this.props;
     this.totalPages = Math.ceil(dataSize / sizePerPage);
-    const pageBtns = this.makePage();
-    const pageListStyle = {
-      float: 'right',
-      // override the margin-top defined in .pagination class in bootstrap.
-      marginTop: '0px'
-    };
 
     const sizePerPageOptions = sizePerPageList.map((_sizePerPage) => {
       return (
@@ -60,39 +86,68 @@ class PaginationList extends Component {
     });
 
     return (
-      <div className='row' style={ { marginTop: 15 } }>
-        {
-          sizePerPageList.length > 1
-          ? <div>
-              <div className='col-md-6'>
-                <div className='dropdown'>
-                  <button className='btn btn-default dropdown-toggle'
-                    type='button' id='pageDropDown' data-toggle='dropdown'
-                    aria-expanded='true'>
-                    { sizePerPage }
-                    <span>
-                      { ' ' }
-                      <span className='caret'/>
-                    </span>
-                  </button>
-                  <ul className='dropdown-menu' role='menu' aria-labelledby='pageDropDown'>
-                    { sizePerPageOptions }
-                  </ul>
-                </div>
-              </div>
-              <div className='col-md-6'>
-                <ul className='pagination' style={ pageListStyle }>
-                  { pageBtns }
+          <nav className='navbar adp-table-nav'>
+            <div className='container-fluid'>
+              <div className='navbar-collapse collapse adp-table-pagination'>
+
+                <ul className='nav navbar-nav navbar-right'>
+                  <li className='active'>
+                    <div className='prev-pages'>
+                      <ul>
+                        <li>
+                          <button onClick={ this.firstPage } className='btn btn-default btn-first-page'>
+                            <i className='icon-pagination-first'></i>
+                          </button>
+                        </li>
+                        <li>
+                          <button onClick={ this.previousPage } className='btn btn-default btn-prev-page'>
+                            <i className='icon-pagination-previous'></i>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div className='adp-pagination-input'>
+                      <input type='number' role='textbox' min='1' max={ this.totalPages } className='current-start-page' value={ this.props.currPage } onChange={ this.changePageHandler }/>
+                    </div>
+                  </li>
+                  <li>
+                    <p className='adp-page-indicator'> of <span className='total-pages'>{ this.totalPages }</span></p>
+                  </li>
+                  <li>
+                    <div className='next-pages'>
+                      <ul>
+                        <li>
+                          <button onClick={ this.nextPage } className='btn btn-default btn-next-page'>
+                            <i className='icon-pagination-next'></i>
+                          </button>
+                        </li>
+                        <li>
+                          <button onClick={ this.lastPage } className='btn btn-default btn-last-page'>
+                            <i className='icon-pagination-last'></i>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
                 </ul>
+
+                <div className='rows-per-page-select pull-right'>
+                  <label className='pull-left'>Rows per page</label>
+                  <div className='dropdown adp-dropdown btn-group pull-left' data-selectable='true'>
+                    <button type='button' className='ui-select-container btn' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                      <span className='selected-item'>{ sizePerPage }</span><span className='caret'></span>
+                    </button>
+                    <ul className='dropdown-menu' role='menu'>
+                      { sizePerPageOptions }
+                    </ul>
+                  </div>
+                </div>
+
               </div>
             </div>
-          : <div className='col-md-12'>
-              <ul className='pagination' style={ pageListStyle }>
-                { pageBtns }
-              </ul>
-            </div>
-        }
-      </div>
+          </nav>
     );
   }
 
