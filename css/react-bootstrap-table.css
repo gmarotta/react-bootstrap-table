@@ -5,11 +5,6 @@
   margin-bottom: 0px;
 }
 
-.react-bs-table {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
 .react-bs-table table {
   margin-bottom: 0px;
   table-layout: fixed;
@@ -30,7 +25,7 @@
 }
 
 .react-bs-table-tool-bar {
-  margin: 10px 10px 0px 10px;
+  margin: 10px 0px 10px 0px;
 }
 
 .react-bs-container-header {
