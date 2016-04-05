@@ -4181,11 +4181,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        insertBtn = _react2['default'].createElement(
 	          'button',
 	          { type: 'button',
-	            className: 'btn btn-info react-bs-table-add-btn',
-	            'data-toggle': 'modal',
-	            'data-target': '.' + this.modalClassName },
-	          _react2['default'].createElement('i', { className: 'glyphicon glyphicon-plus' }),
-	          ' New'
+	            onClick: this.props.enableInsert,
+	            className: 'btn btn-link' },
+	          _react2['default'].createElement('i', { className: 'fa fa-plus-circle fa-fw' }),
+	          ' Add'
 	        );
 	      }
 
@@ -4227,7 +4226,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      var searchTextInput = this.renderSearchPanel();
-	      var modal = this.props.enableInsert ? this.renderInsertRowModal() : null;
 
 	      return _react2['default'].createElement(
 	        'div',
@@ -4249,8 +4247,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          { className: 'col-xs-12 col-sm-6 col-md-6 col-lg-4' },
 	          searchTextInput
 	        ),
-	        _react2['default'].createElement(_NotificationJs2['default'], { ref: 'notifier' }),
-	        modal
+	        _react2['default'].createElement(_NotificationJs2['default'], { ref: 'notifier' })
 	      );
 	    }
 	  }, {
@@ -4411,7 +4408,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onAddRow: _react.PropTypes.func,
 	  onDropRow: _react.PropTypes.func,
 	  onShowOnlySelected: _react.PropTypes.func,
-	  enableInsert: _react.PropTypes.bool,
+	  enableInsert: _react.PropTypes.func,
 	  enableDelete: _react.PropTypes.bool,
 	  enableSearch: _react.PropTypes.bool,
 	  enableShowOnlySelected: _react.PropTypes.bool,
@@ -4423,7 +4420,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	ToolBar.defaultProps = {
-	  enableInsert: false,
 	  enableDelete: false,
 	  enableSearch: false,
 	  enableShowOnlySelected: false,

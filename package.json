@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "classnames": "^2.1.2",
+    "font-awesome": "^4.5.0",
     "react-toastr": "^2.3.1"
   },
   "peerDependencies": {

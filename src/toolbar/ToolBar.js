@@ -189,11 +189,8 @@ class ToolBar extends Component {
     if (this.props.enableInsert) {
       insertBtn = (
         <button type='button'
-          className='btn btn-info react-bs-table-add-btn'
-          data-toggle='modal'
-          data-target={ '.' + this.modalClassName }>
-          <i className='glyphicon glyphicon-plus'></i> New
-        </button>
+                onClick={ this.props.enableInsert }
+                className='btn btn-link'><i className='fa fa-plus-circle fa-fw'/> Add</button>
       );
     }
 
@@ -233,7 +230,6 @@ class ToolBar extends Component {
     }
 
     const searchTextInput = this.renderSearchPanel();
-    const modal = this.props.enableInsert ? this.renderInsertRowModal() : null;
 
     return (
       <div className='row'>
@@ -249,7 +245,6 @@ class ToolBar extends Component {
           { searchTextInput }
         </div>
         <Notifier ref='notifier' />
-        { modal }
       </div>
     );
   }
@@ -365,7 +360,7 @@ ToolBar.propTypes = {
   onAddRow: PropTypes.func,
   onDropRow: PropTypes.func,
   onShowOnlySelected: PropTypes.func,
-  enableInsert: PropTypes.bool,
+  enableInsert: PropTypes.func,
   enableDelete: PropTypes.bool,
   enableSearch: PropTypes.bool,
   enableShowOnlySelected: PropTypes.bool,
@@ -377,7 +372,6 @@ ToolBar.propTypes = {
 };
 
 ToolBar.defaultProps = {
-  enableInsert: false,
   enableDelete: false,
   enableSearch: false,
   enableShowOnlySelected: false,
