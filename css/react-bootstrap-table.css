@@ -16,9 +16,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.react-bs-table {
-  margin: 5px 10px 5px 10px;
-}
 
 .react-bs-table-pagination {
   margin: 10px;
