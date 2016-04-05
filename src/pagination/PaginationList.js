@@ -45,7 +45,7 @@ class PaginationList extends Component {
     const { dataSize, sizePerPage } = this.props;
     const totalPages = Math.ceil(dataSize / sizePerPage);
 
-    const val = e;
+    const val = e.target.value;
     if (val <= totalPages ) {
       this.changePage(val);
     }

@@ -3688,7 +3688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var totalPages = Math.ceil(dataSize / sizePerPage);
 
-	      var val = e;
+	      var val = e.target.value;
 	      if (val <= totalPages) {
 	        _this.changePage(val);
 	      }
