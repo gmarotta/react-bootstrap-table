@@ -55,6 +55,7 @@ class TableHeader extends Component {
           <Checkbox
             onChange={ this.props.onSelectAllRow }
             checked={ this.props.isSelectAll }/>
+          <label>checkbox</label>
         </SelectRowHeaderColumn>
       );
     } else {

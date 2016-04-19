@@ -1238,7 +1238,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          null,
 	          _react2['default'].createElement(Checkbox, {
 	            onChange: this.props.onSelectAllRow,
-	            checked: this.props.isSelectAll })
+	            checked: this.props.isSelectAll }),
+	          _react2['default'].createElement(
+	            'label',
+	            null,
+	            'checkbox'
+	          )
 	        );
 	      } else {
 	        return null;
@@ -1714,7 +1719,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _TableColumn2['default'],
 	          { dataAlign: 'center' },
 	          _react2['default'].createElement('input', { type: 'checkbox', checked: selected,
-	            onChange: this.handleSelectRowColumChange })
+	            onChange: this.handleSelectRowColumChange }),
+	          _react2['default'].createElement(
+	            'label',
+	            null,
+	            'checkbox'
+	          )
 	        );
 	      }
 	    }

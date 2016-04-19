@@ -256,6 +256,7 @@ class TableBody extends Component {
         <TableColumn dataAlign='center'>
           <input type='checkbox' checked={ selected }
           onChange={ this.handleSelectRowColumChange }/>
+          <label>checkbox</label>
         </TableColumn>
       );
     }
